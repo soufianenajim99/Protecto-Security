@@ -47,14 +47,15 @@
 <%--                        </c:url>--%>
 
                         <!-- construct an "delete" link with utilisateur id -->
-<%--                        <c:url var="deleteLink" value="/utilisateur/delete">--%>
-<%--                            <c:param name="utilisateurId" value="${tempCustomer.id}" />--%>
-<%--                        </c:url>--%>
+                        <c:url var="deleteLink" value="/utilisateur/delete">
+                            <c:param name="utilisateurId" value="${tempCustomer.id}" />
+                        </c:url>
 
                         <tr>
                             <td>${tempCustomer.username}</td>
                             <td>${tempCustomer.address}</td>
                             <td>${tempCustomer.telephone}</td>
+0
 
                             <td>
                                 <!-- display the update link --> <a href="${updateLink}">Update</a>
