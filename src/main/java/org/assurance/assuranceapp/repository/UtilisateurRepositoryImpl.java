@@ -1,6 +1,7 @@
 package org.assurance.assuranceapp.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -48,6 +49,17 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
     @Override
     public Utilisateur findById(UUID theId) {
         return entityManager.find(Utilisateur.class, theId);
+    }
+
+    @Override
+    public Utilisateur findByUsername(String username) {
+        try {
+            return entityManager.createQuery("SELECT u FROM Utilisateur u WHERE u.username = :username", Utilisateur.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package org.assurance.assuranceapp.service;
 
 import org.assurance.assuranceapp.models.Utilisateur;
 import org.assurance.assuranceapp.repository.UtilisateurRepositoryImpl;
+import org.assurance.assuranceapp.repository.repositoryInterfaces.UtilisateurRepository;
 import org.assurance.assuranceapp.service.serviceInterfaces.UtilisateurServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Service
 public class UtilisateurService implements UtilisateurServiceInterface {
     @Autowired
-    UtilisateurRepositoryImpl repo;
+    UtilisateurRepository repo;
 
     @Transactional
     public Utilisateur save(Utilisateur customer) {
@@ -24,7 +25,7 @@ public class UtilisateurService implements UtilisateurServiceInterface {
 
     @Transactional
     public List<Utilisateur> findAll() {
-        return (List<Utilisateur>) repo.findAll();
+        return repo.findAll();
     }
 
     @Transactional
@@ -37,4 +38,8 @@ public class UtilisateurService implements UtilisateurServiceInterface {
         repo.deleteById(id);
     }
 
+    @Transactional
+    public  Utilisateur findByUsername(String username){
+    return repo.findByUsername(username);
+    }
 }

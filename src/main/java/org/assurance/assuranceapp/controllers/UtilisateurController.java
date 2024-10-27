@@ -1,6 +1,7 @@
 package org.assurance.assuranceapp.controllers;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.assurance.assuranceapp.models.Utilisateur;
 import org.assurance.assuranceapp.service.UtilisateurService;
 import org.assurance.assuranceapp.service.serviceInterfaces.UtilisateurServiceInterface;
@@ -20,6 +21,8 @@ public class UtilisateurController {
 
     @Autowired
     private UtilisateurServiceInterface userService;
+    @Autowired
+    private HttpSession httpSession;
 
 
     @GetMapping("/register")
@@ -39,24 +42,33 @@ public class UtilisateurController {
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
-        model.addAttribute("utilisateur", new Utilisateur()); // Create a new instance of Utilisateur for the form
+        Utilisateur utilisateur = new Utilisateur();
+        model.addAttribute("utilisateur", utilisateur); // Create a new instance of Utilisateur for the form
         return "login"; // Return the view name for the login page
     }
 
-//    // Handle login form submission
-//    @PostMapping("/login")
-//    public String loginUser(@RequestParam String username,
-//                            @RequestParam String password,
-//                            Model model) {
-//        Utilisateur user = userService.findByUsername(username);
-//        if (user != null && user.getPassword().equals(password)) {
-//            // Implement session or redirect logic
-//            return "welcome";  // Redirect to a welcome page or dashboard
-//        } else {
-//            model.addAttribute("error", "Invalid username or password");
-//            return "login";
-//        }
-//    }
+    @PostMapping("/login")
+    public String loginUser(@RequestParam String username,
+                            @RequestParam String password,
+                            Model model) {
+        Utilisateur user = userService.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            httpSession.setAttribute("loggedInUser", user);
+            model.addAttribute("loggedInUser", user);
+            return "redirect:/utilisateur/welcome";  // Redirect to the welcome or dashboard page
+        } else {
+            model.addAttribute("error", "Invalid username or password");
+            return "login"; // Stay on login page with error message
+        }
+    }
+
+    @GetMapping("/welcome")
+    public String showWelcomePage(Model model) {
+        // Fetch the logged-in user from the session
+        Utilisateur loggedInUser = (Utilisateur) httpSession.getAttribute("loggedInUser");
+        model.addAttribute("loggedInUser", loggedInUser);
+        return "home";  // Returns the welcome JSP page
+    }
 
 
 
@@ -109,4 +121,12 @@ public class UtilisateurController {
         userService.deleteById(theId);
         return "redirect:/utilisateur/list";
     }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Invalidate the session
+        return "redirect:/utilisateur/login";
+    }
+
 }

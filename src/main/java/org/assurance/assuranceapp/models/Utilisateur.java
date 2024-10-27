@@ -2,6 +2,7 @@ package org.assurance.assuranceapp.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +15,8 @@ public class Utilisateur {
     private String password;
     private String address;
     private String telephone;
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private List<Assurance> assurances;
 
     public Utilisateur() {
     }

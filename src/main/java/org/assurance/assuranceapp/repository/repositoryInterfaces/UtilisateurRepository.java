@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface UtilisateurRepository extends GenericRepository<Utilisateur> {
 //    Optional<Utilisateur> findByUsername(String username);
+      Utilisateur findByUsername(String username);
 }
