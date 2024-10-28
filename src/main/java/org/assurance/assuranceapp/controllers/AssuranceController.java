@@ -1,7 +1,9 @@
 package org.assurance.assuranceapp.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.assurance.assuranceapp.models.AssuranceSante;
 import org.assurance.assuranceapp.models.Devis;
+import org.assurance.assuranceapp.models.Utilisateur;
 import org.assurance.assuranceapp.service.AssuranceSanteService;
 import org.assurance.assuranceapp.service.DevisService;
 import org.assurance.assuranceapp.service.serviceInterfaces.AssuranceSanteServiceInterface;
@@ -21,6 +23,8 @@ public class AssuranceController {
 
     @Autowired
     private DevisServiceInterface devisService;
+    @Autowired
+    private HttpSession httpSession;
 
     @GetMapping("/HealthInsuranceForm")
     public String showHealthInsuranceForm(Model model) {
@@ -32,6 +36,8 @@ public class AssuranceController {
         // Calculate the base price and set Devis status
         double basePrice = 150.0;
         double finalPrice = devisService.calculateFinalPrice(assuranceSante);
+        Utilisateur loggedInUser = (Utilisateur) httpSession.getAttribute("loggedInUser");
+
 
         Devis devis = new Devis();
         devis.setStatus("EN_COURS");
@@ -41,7 +47,9 @@ public class AssuranceController {
         // Save the Devis and AssuranceSante
         devisService.save(devis);
         assuranceSante.setDevis(devis);
+        assuranceSante.setUtilisateur(loggedInUser);
         assuranceSanteService.save(assuranceSante);
+
 
         return "redirect:/confirmation"; // redirect to a confirmation page
     }

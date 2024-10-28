@@ -11,8 +11,8 @@ public class AssuranceSante extends Assurance {
     public AssuranceSante() {
     }
 
-    public AssuranceSante(double prixDeBase, double prixFinale, Utilisateur utilisateur, Devis devis, String historiqueSante, String typeCouverture, int age) {
-        super(prixDeBase, prixFinale, utilisateur, devis);
+    public AssuranceSante( Utilisateur utilisateur, Devis devis, String historiqueSante, String typeCouverture, int age) {
+        super(utilisateur, devis);
         this.historiqueSante = historiqueSante;
         this.typeCouverture = typeCouverture;
         this.age = age;

@@ -10,8 +10,6 @@ public class Assurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private double prixDeBase;
-    private double prixFinale;
 
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
@@ -20,9 +18,7 @@ public class Assurance {
     @OneToOne(mappedBy = "assurance", cascade = CascadeType.ALL)
     private Devis devis;
 
-    public Assurance(double prixDeBase, double prixFinale, Utilisateur utilisateur, Devis devis) {
-        this.prixDeBase = prixDeBase;
-        this.prixFinale = prixFinale;
+    public Assurance( Utilisateur utilisateur, Devis devis) {
         this.utilisateur = utilisateur;
         this.devis = devis;
     }
@@ -38,21 +34,7 @@ public class Assurance {
         this.id = id;
     }
 
-    public double getPrixDeBase() {
-        return prixDeBase;
-    }
 
-    public void setPrixDeBase(double prixDeBase) {
-        this.prixDeBase = prixDeBase;
-    }
-
-    public double getPrixFinale() {
-        return prixFinale;
-    }
-
-    public void setPrixFinale(double prixFinale) {
-        this.prixFinale = prixFinale;
-    }
 
     public Utilisateur getUtilisateur() {
         return utilisateur;
@@ -70,10 +52,9 @@ public class Assurance {
         this.devis = devis;
     }
 
-    public Assurance(UUID id, double prixDeBase, double prixFinale, Utilisateur utilisateur, Devis devis) {
+    public Assurance(UUID id, Utilisateur utilisateur, Devis devis) {
         this.id = id;
-        this.prixDeBase = prixDeBase;
-        this.prixFinale = prixFinale;
+
         this.utilisateur = utilisateur;
         this.devis = devis;
     }

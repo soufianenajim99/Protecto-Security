@@ -12,27 +12,54 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Reserve Health Insurance</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/santeens.css">
 </head>
 <body>
-<h2>Reserve Health Insurance (Assurance Sante)</h2>
-<form action="${pageContext.request.contextPath}/reserveAssuranceSante" method="post">
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
+<!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-left">
+        <h3>Protecto</h3>
+    </div>
+    <div class="navbar-right">
+        <p>Welcome, ${loggedInUser.username}</p>
+        <a href="${pageContext.request.contextPath}/utilisateur/logout" class="btn btn-secondary">Logout</a>
+    </div>
+</div>
 
-    <label for="historiqueSante">Health History:</label>
-    <select id="historiqueSante" name="historiqueSante">
-        <option value="none">None</option>
-        <option value="chronique">Chronic Illness</option>
-    </select>
+<!-- Main Content -->
+<div class="container">
+    <h2>Reserve Health Insurance</h2>
+    <p class="form-description">Please fill in the following information to reserve your health insurance plan.</p>
 
-    <label for="typeCouverture">Coverage Type:</label>
-    <select id="typeCouverture" name="typeCouverture">
-        <option value="basic">Basic</option>
-        <option value="premium">Premium</option>
-    </select>
+    <form action="${pageContext.request.contextPath}/reserveAssurance/HealthInsuranceForm" method="post">
+        <!-- Age Input -->
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" id="age" name="age" required>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <!-- Health History Input -->
+        <div class="form-group">
+            <label for="historiqueSante">Health History</label>
+            <select id="historiqueSante" name="historiqueSante">
+                <option value="none">None</option>
+                <option value="chronic">Chronic Illness</option>
+                <option value="acute">Acute Illness</option>
+            </select>
+        </div>
+
+        <!-- Coverage Type Input -->
+        <div class="form-group">
+            <label for="typeCouverture">Coverage Type</label>
+            <select id="typeCouverture" name="typeCouverture">
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary">Submit Reservation</button>
+    </form>
+</div>
 </body>
 </html>

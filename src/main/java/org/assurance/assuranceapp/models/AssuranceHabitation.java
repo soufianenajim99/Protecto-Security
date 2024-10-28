@@ -9,8 +9,8 @@ public class AssuranceHabitation extends Assurance {
     private String localisation;
     private boolean systemeSecurite;
 
-    public AssuranceHabitation(double prixDeBase, double prixFinale, Utilisateur utilisateur, Devis devis, double valeurBien, String typeLogement, String localisation, boolean systemeSecurite) {
-        super(prixDeBase, prixFinale, utilisateur, devis);
+    public AssuranceHabitation( Utilisateur utilisateur, Devis devis, double valeurBien, String typeLogement, String localisation, boolean systemeSecurite) {
+        super( utilisateur, devis);
         this.valeurBien = valeurBien;
         this.typeLogement = typeLogement;
         this.localisation = localisation;

@@ -12,8 +12,8 @@ public class AssuranceAutomobile extends Assurance {
     public AssuranceAutomobile() {
     }
 
-    public AssuranceAutomobile(double prixDeBase, double prixFinale, Utilisateur utilisateur, Devis devis, int ageConducteur, String typeVehicule, String utilisationVehicule, String historiqueConduite) {
-        super(prixDeBase, prixFinale, utilisateur, devis);
+    public AssuranceAutomobile( Utilisateur utilisateur, Devis devis, int ageConducteur, String typeVehicule, String utilisationVehicule, String historiqueConduite) {
+        super(utilisateur, devis);
         this.ageConducteur = ageConducteur;
         this.typeVehicule = typeVehicule;
         this.utilisationVehicule = utilisationVehicule;
