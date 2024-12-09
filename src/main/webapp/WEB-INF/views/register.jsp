@@ -25,7 +25,7 @@
             <div class="panel-body">
                 <!-- Spring form with model attribute "utilisateur" -->
                 <%--@elvariable id="utilisateur" type="org.assurance.assuranceapp.models.Utilisateur"--%>
-                <form:form action="saveUtilisateur"
+                <form:form
                            cssClass="form-horizontal" method="post" modelAttribute="utilisateur">
 
                     <!-- Hidden field for id -->

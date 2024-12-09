@@ -33,8 +33,9 @@ public class UtilisateurController {
         return "register"; // Return to the JSP page name
     }
 
-    @PostMapping(value = "/saveUtilisateur")
+    @PostMapping(value = "/register")
     public String saveUtilisateur(@ModelAttribute("utilisateur") Utilisateur theUtilisateur) {
+        System.out.println(theUtilisateur + "The Utilisateur Registred !!!!");
         userService.save(theUtilisateur);
         return "redirect:/utilisateur/list";
     }

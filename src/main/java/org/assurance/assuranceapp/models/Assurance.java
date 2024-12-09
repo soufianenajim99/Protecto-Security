@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "assurance_type")
+@Table(name = "assurances")
 public class Assurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,11 +21,13 @@ public class Assurance {
     private Devis devis;
 
     public Assurance( Utilisateur utilisateur, Devis devis) {
+        this.id = UUID.randomUUID();
         this.utilisateur = utilisateur;
         this.devis = devis;
     }
 
     public Assurance() {
+        this.id = UUID.randomUUID();
     }
 
     public UUID getId() {
@@ -57,5 +61,14 @@ public class Assurance {
 
         this.utilisateur = utilisateur;
         this.devis = devis;
+    }
+
+    @Override
+    public String toString() {
+        return "Assurance{" +
+                "id=" + id +
+                ", utilisateur=" + utilisateur +
+                ", devis=" + devis.getId() +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package org.assurance.assuranceapp.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.assurance.assuranceapp.models.AssuranceSante;
 import org.assurance.assuranceapp.repository.repositoryInterfaces.AssuranceSanteRepository;
 import org.assurance.assuranceapp.service.serviceInterfaces.AssuranceSanteServiceInterface;
@@ -14,6 +16,7 @@ import java.util.UUID;
 public class AssuranceSanteService implements AssuranceSanteServiceInterface {
     @Autowired
     private AssuranceSanteRepository assuranceSanteRepository;
+
 
     @Override
     @Transactional

@@ -1,8 +1,12 @@
 package org.assurance.assuranceapp.models;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
+@DiscriminatorValue("AssuranceHabitation")
+@Table(name = "assurancehabitation")
 public class AssuranceHabitation extends Assurance {
     private double valeurBien;
     private String typeLogement;

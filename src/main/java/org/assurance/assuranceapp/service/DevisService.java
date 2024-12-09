@@ -139,6 +139,11 @@ public class DevisService implements DevisServiceInterface {
         return finalPrice;
     }
 
+    @Override
+    public Devis findDevisByAssuranceId(UUID assuranceId) {
+        return repo.findByAssuranceId(assuranceId);
+    }
+
 
 
 

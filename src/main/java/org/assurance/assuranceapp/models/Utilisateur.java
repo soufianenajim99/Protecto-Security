@@ -60,5 +60,16 @@ public class Utilisateur {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
 }
 

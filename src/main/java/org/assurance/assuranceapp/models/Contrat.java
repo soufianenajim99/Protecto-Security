@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
+@Table(name = "contrats")
 public class Contrat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

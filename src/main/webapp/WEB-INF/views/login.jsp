@@ -28,13 +28,13 @@
                     <div class="form-group">
                         <label for="username" class="col-md-3 control-label">Username</label>
                         <div class="col-md-9">
-                            <form:input path="username" cssClass="form-control" />
+                            <form:input path="username" name="username" cssClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-md-3 control-label">Password</label>
                         <div class="col-md-9">
-                            <form:input path="password" cssClass="form-control" type="password"/>
+                            <form:input path="password" name="password" cssClass="form-control" type="password"/>
                         </div>
                     </div>
 

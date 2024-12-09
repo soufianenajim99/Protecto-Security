@@ -19,9 +19,15 @@ public class DevisRepositoryImpl implements DevisRepository {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public Devis save(Devis devis) {
-        return entityManager.merge(devis);
+        if (devis.getId() != null && entityManager.find(Devis.class, devis.getId()) != null) {
+            // If Devis exists (based on ID), update it using merge
+            return entityManager.merge(devis);
+        } else {
+            // If Devis does not exist (no ID or not found), persist it as a new entry
+            entityManager.persist(devis);
+            return devis;
+        }
     }
 
     @Override
@@ -45,4 +51,17 @@ public class DevisRepositoryImpl implements DevisRepository {
             entityManager.remove(devis);
         }
     }
+
+    @Override
+    public Devis findByAssuranceId(UUID assuranceId) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Devis> cq = cb.createQuery(Devis.class);
+        Root<Devis> root = cq.from(Devis.class);
+
+        cq.select(root).where(cb.equal(root.get("assurance").get("id"), assuranceId));
+
+        List<Devis> results = entityManager.createQuery(cq).getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
 }

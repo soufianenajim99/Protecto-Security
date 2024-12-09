@@ -35,7 +35,7 @@
         <!-- Age Input -->
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="text" id="age" name="age" required>
+            <input type="number" id="age" name="age" required>
         </div>
 
         <!-- Health History Input -->

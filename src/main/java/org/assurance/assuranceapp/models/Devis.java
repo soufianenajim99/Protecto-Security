@@ -7,10 +7,13 @@ import java.util.UUID;
 @Entity
 public class Devis {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String status;
+
+    @Column(name = "prixdebase")
     private double prixDeBase;
+    @Column(name = "prixfinale")
     private double prixFinale;
 
     @OneToOne
@@ -76,5 +79,16 @@ public class Devis {
 
     public void setContrat(Contrat contrat) {
         this.contrat = contrat;
+    }
+
+    @Override
+    public String toString() {
+        return "Devis{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", prixDeBase=" + prixDeBase +
+                ", prixFinale=" + prixFinale +
+                ", assurance=" + assurance.getId() +
+                '}';
     }
 }
